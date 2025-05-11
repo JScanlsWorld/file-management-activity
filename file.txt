@@ -1,0 +1,51 @@
+section .text
+
+	global _start
+
+_start:
+	;create the file
+	mov eax, 8
+	mov ebx, filename
+	mov ecx, 0744o
+	int 0x80
+
+	;open the file
+	mov eax, 5
+	mov ebx, filename
+	mov ecx, 1
+	mov edx, 0744o
+	int 0x80
+
+	;retreive the file descriptor 
+	mov [fd_out], eax
+
+	;insert the first quote (quote1) into the text file
+	mov eax, 4
+	mov ebx, [fd_out]
+	mov ecx, quote1
+	mov edx, 120
+	int 0x80
+
+ 	;insert the second quote (quote2) into the text file
+	mov eax, 4
+	mov ebx, [fd_out]
+	mov ecx, quote2
+	mov edx, 85
+	int 0x80
+
+	;close the file
+	mov eax, 6
+	mov ebx, [fd_out]
+	int 0x80
+
+	mov eax, 1
+	int 0x80
+
+section .bss 
+	fd_out resb 1
+
+section .data
+	filename db "quotes.txt", 0h
+
+	quote1 db "To be, or not to be, that is the question.", 0xa, "A fool thinks himself to be wise, but a wise man knows himself to be a fool.", 0xa
+	quote2 db "Better three hours too soon than a minute too late.", 0xa, "No legacy is so rich as honesty.", 0xa
