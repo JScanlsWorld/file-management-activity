@@ -1,0 +1,9 @@
+Thought Process:
+
+In order to create my soultion, I followed what was demonstrated in the lectue a created two sys write operations (one per quote).
+
+Challenges:
+
+I had a massive problem with correctly allocating space. For some reason, despite confirming multiple times that two newline declarations
+and the quote were the correct lengths for each quote (121 and 86 respectively), I would print out garbage or have a letter be duplicated.
+I subtracted 1 from both 121 and 86, which solved the problem and allowed for the text file to print correctly.
