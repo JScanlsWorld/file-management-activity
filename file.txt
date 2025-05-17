@@ -26,7 +26,14 @@ _start:
 	mov edx, 120
 	int 0x80
 
- 	;insert the second quote (quote2) into the text file
+ 	;call lseek to append the second quote
+	mov eax, 19
+	mov ebx, [fd_out]
+	mov ecx, 0
+	mov edx, 1
+	int 0x80
+
+	;append the second quote (quote2) into the text file
 	mov eax, 4
 	mov ebx, [fd_out]
 	mov ecx, quote2
